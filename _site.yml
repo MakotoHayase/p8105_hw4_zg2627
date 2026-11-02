@@ -1,0 +1,20 @@
+
+name: "personal-website"
+output_dir: "docs"
+
+navbar:
+  title: "Personal Website"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Resume"
+      href: resume.html
+  right:
+    - text: "GitHub"
+      href: https://github.com/MakotoHayase
+    - text: "Email"
+      href: mailto:zg2627@cumc.columbia.edu
+
+output:
+  html_document:
+    theme: cosmo

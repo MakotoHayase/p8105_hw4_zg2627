@@ -1,0 +1,22 @@
+---
+title: "About Me"
+output: html_document
+---
+
+## Welcome!
+
+Hello! I am a graduate student pursuing an MS in Biostatistics at Columbia University's Mailman School of Public Health.
+
+My academic interests include biostatistics, public health data science, and statistical analysis.
+
+## Education
+
+**Columbia University**  
+MS in Biostatistics
+
+**University of North Carolina at Chapel Hill**  
+BS in Statistics and Analytics
+
+## About This Website
+
+This website introduces my academic background, professional experiences, and data science projects.
