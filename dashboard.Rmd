@@ -1,0 +1,195 @@
+---
+title: "Instacart Shopping Behavior"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+
+data("instacart", package = "p8105.datasets")
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+```{r, include=FALSE}
+# Dataset dimensions and variables
+dim(instacart)
+names(instacart)
+glimpse(instacart)
+
+# Number of unique orders, users, and products
+instacart |>
+  summarise(
+    n_orders = n_distinct(order_id),
+    n_users = n_distinct(user_id),
+    n_products = n_distinct(product_id)
+  )
+
+# Purchase frequencies by department
+instacart |>
+  count(department, sort = TRUE) |>
+  print(n = Inf)
+
+# Order counts by hour
+instacart |>
+  distinct(order_id, order_hour_of_day) |>
+  count(order_hour_of_day) |>
+  arrange(order_hour_of_day) |>
+  print(n = Inf)
+
+# Purchase frequencies and reorder rates
+instacart |>
+  group_by(department) |>
+  summarise(
+    n_purchases = n(),
+    reorder_rate = mean(reordered, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(desc(n_purchases)) |>
+  print(n = Inf)
+```
+
+```{r data-preparation, include=FALSE}
+# Orders by hour
+hourly_orders =
+  instacart |>
+  distinct(order_id, order_hour_of_day) |>
+  count(order_hour_of_day, name = "n_orders") |>
+  arrange(order_hour_of_day)
+
+# Top 10 departments by purchase frequency
+top_departments =
+  instacart |>
+  count(department, name = "n_purchases", sort = TRUE) |>
+  slice_head(n = 10)
+
+# Department-level purchase frequency and reorder rate
+department_summary =
+  instacart |>
+  group_by(department) |>
+  summarise(
+    n_purchases = n(),
+    reorder_rate = mean(reordered, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+print(hourly_orders, n = Inf)
+
+print(top_departments, n = Inf)
+
+print(department_summary, n = Inf)
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Shopping Activity
+
+```{r}
+plot_ly(
+  data = hourly_orders,
+  x = ~order_hour_of_day,
+  y = ~n_orders,
+  type = "scatter",
+  mode = "lines+markers",
+  text = ~paste0(
+    "Hour: ", order_hour_of_day, ":00",
+    "<br>Orders: ", scales::comma(n_orders)
+  ),
+  hoverinfo = "text",
+  line = list(color = "#4599D0", width = 3),
+  marker = list(size = 5)
+) |>
+  layout(
+    xaxis = list(
+      title = "Hour of Day",
+      tickmode = "linear",
+      dtick = 2
+    ),
+    yaxis = list(
+      title = "Number of Orders",
+      separatethousands = TRUE
+    )
+  )
+```
+
+### Popular Departments
+
+```{r}
+
+plot_ly(
+  data = top_departments |>
+    mutate(
+      department = forcats::fct_reorder(
+        department, n_purchases
+      )
+    ),
+  x = ~n_purchases,
+  y = ~department,
+  type = "bar",
+  orientation = "h",
+  hovertext = ~paste0(
+    department,
+    "<br>Purchases: ",
+    scales::comma(n_purchases)
+  ),
+  hoverinfo = "text",
+  marker = list(color = "#72B7DD")
+) |>
+  layout(
+    xaxis = list(
+      title = "Number of Item Purchases",
+      separatethousands = TRUE
+    ),
+    yaxis = list(title = ""),
+    margin = list(l = 120)
+  )
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Reorder Patterns
+
+```{r}
+
+plot_ly(
+  data = department_summary,
+  x = ~n_purchases,
+  y = ~reorder_rate,
+  type = "scatter",
+  mode = "markers",
+  text = ~paste0(
+    "Department: ", department,
+    "<br>Purchases: ", scales::comma(n_purchases),
+    "<br>Reorder Rate: ",
+    scales::percent(reorder_rate, accuracy = 0.1)
+  ),
+  hoverinfo = "text",
+  marker = list(
+    color = "#4599D0",
+    size = 10,
+    opacity = 0.75
+  )
+) |>
+  layout(
+    xaxis = list(
+      title = "Number of Item Purchases",
+      separatethousands = TRUE
+    ),
+    yaxis = list(
+      title = "Reorder Rate",
+      tickformat = ".0%"
+    )
+  )
+```
