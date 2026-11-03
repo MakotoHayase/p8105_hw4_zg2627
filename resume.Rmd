@@ -5,10 +5,62 @@ output: html_document
 
 ## Education
 
-## Research Experience
+**Columbia University, Mailman School of Public Health**  
+M.S. in Biostatistics — Public Health Data Science  
+2026 – Present
+
+**University of North Carolina at Chapel Hill**  
+B.S. in Data Science  
+Majors: Statistics and Analytics, Data Science
+
+---
 
 ## Professional Experience
 
+### Zhejiang Provincial Health Commission
+**Data Analysis Intern | Hangzhou, China**  
+*May 2025 – July 2025*
+
+- Cleaned and processed infectious and chronic disease surveillance data from national and regional databases.
+- Conducted descriptive statistics and temporal trend analyses using R and SPSS.
+- Developed visualizations and analytical reports to support public health recommendations.
+- Assisted with epidemiological survey design, data collection, and quality control.
+
+### Beijing Guokr Interactive Technology Media Co., Ltd.
+**Content Intern | Beijing, China**  
+*May 2023 – July 2023*
+
+- Processed and organized data for health communication and advertising projects.
+- Evaluated campaign performance using audience engagement and reach metrics.
+- Analyzed audience characteristics and behavioral patterns to identify demographic and interest-based segments.
+
+---
+
+## Academic Projects
+
+### LLM-Powered Clinical Phenotyping for Survival Analysis
+**Project Leader | April 2025 – June 2025**
+
+- Developed an LLM-based pipeline to extract clinical phenotypes and treatment outcomes from unstructured electronic health records.
+- Fine-tuned a Transformer-based language model for named entity recognition and relation extraction.
+- Integrated extracted clinical information with structured patient data to support survival analysis using Cox proportional hazards models.
+
+### Fairness and Bias in Health Risk Prediction Algorithms
+**Project Member | January 2025 – May 2025**
+
+- Investigated algorithmic bias in healthcare risk prediction using synthetic patient data.
+- Developed and evaluated Lasso, Random Forest, SVR, and XGBoost models using 5-fold cross-validation.
+- Assessed fairness disparities and examined the limitations of conventional predictive performance metrics.
+
+---
+
 ## Technical Skills
 
-## Projects
+**Programming:** R, Python
+
+**Data Science and Machine Learning:** PyTorch, NumPy, Matplotlib
+
+**Statistical Software:** SPSS
+
+**Development Tools:** Git, VS Code
+

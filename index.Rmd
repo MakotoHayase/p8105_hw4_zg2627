@@ -9,14 +9,6 @@ Hello! I am a graduate student pursuing an MS in Biostatistics at Columbia Unive
 
 My academic interests include biostatistics, public health data science, and statistical analysis.
 
-## Education
-
-**Columbia University**  
-MS in Biostatistics
-
-**University of North Carolina at Chapel Hill**  
-BS in Statistics and Analytics
-
 ## About This Website
 
-This website introduces my academic background, professional experiences, and data science projects.
+This website introduces my academic background, professional experiences, and data science projects. You can learn more about my education and experiences on the Resume page.
